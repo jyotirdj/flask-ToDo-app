@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Completed Tasks</title>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2 class="text-center mb-4">✅ Completed Tasks</h2>
+
+    {% if tasks|length < 1 %}
+        <h4 class="text-center text-muted">No completed tasks yet</h4>
+    {% else %}
+    <table class="table table-striped text-center align-middle">
+        <thead class="table-success">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Status</th>
+                <th scope="col">Content</th>
+                <th scope="col">Created Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <th scope="row">{{ task.id }}</th>
+                <td>
+                    {% if task.status == 'done' %}
+                        ✅ Done
+                    {% else %}
+                        ⏳ Pending
+                    {% endif %}
+                </td>
+                <td>{{ task.content }}</td>
+                <td>{{ task.date.strftime('%Y-%m-%d %H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

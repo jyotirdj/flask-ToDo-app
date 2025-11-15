@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>To-Do App</title>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">My To-Do App</h2>
+
+    <!-- Add Task Form -->
+    <div class="d-flex justify-content-center align-items-center mb-4">
+        <form action="/" method="POST" class="d-flex">
+            <input type="text" name="content" id="content" class="form-control" placeholder="Enter a new task" required>
+            <input class="btn btn-primary ms-2" type="submit" value="Add">
+        </form>
+    </div>
+
+    <!-- Tasks Section -->
+    {% if tasks | length < 1 %}
+        <h5 class="text-center text-muted">No tasks to show</h5>
+    {% else %}
+    <table class="table table-striped table-hover align-middle text-center">
+        <thead class="table-primary">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Status</th>
+                <th scope="col">Content</th>
+                <th scope="col">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <th scope="row">{{ task.id }}</th>
+                <td>{% if task.complete %}✅ Done{% else %}⏳ Pending{% endif %}</td>
+                <td>{{ task.content }}</td>
+                <td>
+                    <a href="/edit/{{ task.id }}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/update/{{ task.id }}" class="btn btn-sm btn-success me-1">Done</a>
+                    <a href="/delete/{{ task.id }}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>To-Do App</title>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Edit Page </h2>
+
+    <div class="d-flex justify-content-center align-items-center mb-4">
+        <!-- <form action="/edit/{{task.id}}" method="POST" class="d-flex"> -->
+        <form action="{{ url_for('edit', id=task.id) }}" method="POST" class="d-flex">
+
+            <input type="text" name="content" value="{{task.content}}" id="content" class="form-control" placeholder="Enter a new task" required>
+            <input class="btn btn-primary ms-2" type="submit" value="Add">
+        </form>
+    </div>
+</div>
+{% endblock %}
